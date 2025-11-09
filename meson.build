@@ -16,7 +16,10 @@ clang_dep = cpp.find_library(
 
 shared_module(
     'cse3210-clang-tidy',
-    ['src/CSE3210HeaderGuardCheck.cpp'],
+    [
+        'src/CSE3210TidyModule.cpp',
+        'src/HeaderGuardCheck.cpp',
+    ],
     dependencies: [llvm_dep, clang_dep],
     name_prefix: '',
 )
