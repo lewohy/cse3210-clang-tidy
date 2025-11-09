@@ -1,5 +1,5 @@
 project(
-    'cse3210-header-guard-tidy',
+    'cse3210-clang-tidy',
     ['c', 'cpp'],
     version: '0.1.0',
     default_options: ['cpp_std=c++17', 'buildtype=release'],
@@ -15,7 +15,7 @@ clang_dep = cpp.find_library(
 )
 
 shared_module(
-    'header-guard',
+    'cse3210-clang-tidy',
     ['src/CSE3210HeaderGuardCheck.cpp'],
     dependencies: [llvm_dep, clang_dep],
     name_prefix: '',

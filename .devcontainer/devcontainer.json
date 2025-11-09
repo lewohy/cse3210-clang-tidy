@@ -9,10 +9,13 @@
         "vscode": {
             "extensions": [
                 "vadimcn.vscode-lldb",
-                "llvm-vs-code-extensions.vscode-clangd",
                 "mesonbuild.mesonbuild",
-                "CS128.cs128-clang-tidy"
-            ],
-        },
-    },
+                "redhat.vscode-yaml",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "Gruntfuggly.todo-tree",
+                "ms-vscode.cpptools",
+                "cschlosser.doxdocgen"
+            ]
+        }
+    }
 }

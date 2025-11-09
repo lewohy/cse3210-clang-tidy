@@ -3,21 +3,35 @@
 #include "clang-tidy/ClangTidyModuleRegistry.h"
 #include "clang-tidy/utils/HeaderGuard.h"
 #include "clang/Tooling/Tooling.h"
+#include <iostream>
+#include <string>
 
 using namespace clang;
 using namespace clang::tidy;
 using namespace clang::ast_matchers;
 
+const char DefaultHeaderGuardPrefix[] = "";
+
 class CSE3210HeaderGuardCheck : public utils::HeaderGuardCheck {
 public:
   CSE3210HeaderGuardCheck(StringRef Name, ClangTidyContext *Context);
+  void storeOptions(ClangTidyOptions::OptionMap &Opts) override;
   bool shouldSuggestEndifComment(StringRef Filename) override { return false; }
   std::string getHeaderGuard(StringRef Filename, StringRef OldGuard) override;
+
+private:
+  const std::string HeaderGuardPrefix;
 };
 
 CSE3210HeaderGuardCheck::CSE3210HeaderGuardCheck(StringRef Name,
                                                  ClangTidyContext *Context)
-    : HeaderGuardCheck(Name, Context) {}
+    : HeaderGuardCheck(Name, Context),
+      HeaderGuardPrefix(
+          Options.get("HeaderGuardPrefix", DefaultHeaderGuardPrefix)) {}
+
+void CSE3210HeaderGuardCheck::storeOptions(ClangTidyOptions::OptionMap &Opts) {
+  Options.store(Opts, "HeaderGuardPrefix", HeaderGuardPrefix);
+}
 
 std::string CSE3210HeaderGuardCheck::getHeaderGuard(StringRef Filename,
                                                     StringRef OldGuard) {
@@ -71,8 +85,13 @@ std::string CSE3210HeaderGuardCheck::getHeaderGuard(StringRef Filename,
     Guard = "FORTRAN" + Guard.substr(sizeof("flang") - 1);
   }
 
+  // Prefix 추가
+  Guard = HeaderGuardPrefix + Guard;
+
   // 맨 마지막에 _ 추가
   Guard = Guard + "_";
+
+  std::cout << "Suggested header guard: " << Guard << "\n";
 
   return StringRef(Guard).upper();
 }
