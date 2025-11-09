@@ -77,7 +77,7 @@ std::string HeaderGuardCheck::getHeaderGuard(StringRef Filename,
   // 맨 마지막에 _ 추가
   Guard = Guard + "_";
 
-  std::cout << "Suggested header guard: " << Guard << "\n";
+  std::cout << "제안된 헤더가드: " << Guard << "\n";
 
   return StringRef(Guard).upper();
 }

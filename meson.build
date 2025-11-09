@@ -19,6 +19,7 @@ shared_module(
     [
         'src/CSE3210TidyModule.cpp',
         'src/HeaderGuardCheck.cpp',
+        'src/LicenseCheck.cpp',
     ],
     dependencies: [llvm_dep, clang_dep],
     name_prefix: '',

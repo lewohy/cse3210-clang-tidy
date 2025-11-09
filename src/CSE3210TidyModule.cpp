@@ -2,6 +2,7 @@
 #include "clang-tidy/ClangTidyModule.h"
 #include "clang-tidy/ClangTidyModuleRegistry.h"
 #include "src/HeaderGuardCheck.h"
+#include "src/LicenseCheck.h"
 
 using namespace clang;
 using namespace clang::tidy;
@@ -12,6 +13,7 @@ class CSE3210CTidyModule : public ClangTidyModule {
 public:
   void addCheckFactories(ClangTidyCheckFactories &CheckFactories) override {
     CheckFactories.registerCheck<HeaderGuardCheck>("cse3210-header-guard");
+    CheckFactories.registerCheck<LicenseCheck>("cse3210-license-check");
   }
 };
 
