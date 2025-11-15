@@ -1,7 +1,6 @@
 #include "HeaderGuardCheck.h"
 #include "clang-tidy/ClangTidyModule.h"
 #include "clang/Tooling/Tooling.h"
-#include <iostream>
 #include <string>
 
 using namespace clang;
@@ -76,8 +75,6 @@ std::string HeaderGuardCheck::getHeaderGuard(StringRef Filename,
 
   // 맨 마지막에 _ 추가
   Guard = Guard + "_";
-
-  std::cout << "제안된 헤더가드: " << Guard << "\n";
 
   return StringRef(Guard).upper();
 }
